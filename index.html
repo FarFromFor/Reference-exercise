@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <title>Title</title>
     <link rel="stylesheet" type="text/css" href="./style.css">
+    <script src="./script.js"></script>
 </head>
 <body>
 
@@ -13,74 +14,115 @@
 <main>
     <section id="search">
 
-        <input id="search_input" type="text" placeholder="inptut">
+        <section id="text_search">
+            <label for="search_input"></label><input id="search_input" type="text" placeholder="input">
+            <button id="search_button">Search</button>
+        </section>
 
         <section id="select">
-            <select class="select_block">
+            <label for="language_select"></label>
+            <select id="language_select" class="select_block">
                 <option>angličtina</option>
             </select>
-            <select class="select_block">
-                <option>Flashscore Portable projekt</option>
+
+            <label for="project_select"></label>
+            <select id="project_select" class="select_block">
+                <option>flashscore portable projekt</option>
             </select>
-            <select class="select_block">
+
+            <label for="project_type_select"></label>
+            <select id="project_type_select" class="select_block">
                 <option>project-type</option>
             </select>
         </section>
         <h2>Sporty</h2>
         <section id="sports">
-            <div data-score="0" class="choice_block active">
+            <button data-score="0" id="all_sports" class="choice_block active">
                 vše
-            </div>
-            <div data-score="1" class="choice_block">
+            </button>
+            <button data-score="1" class="choice_block">
                 fotbal
-            </div>
-            <div data-score="2" class="choice_block">
+            </button>
+            <button data-score="2" class="choice_block">
                 tenis
-            </div>
-            <div data-score="3" class="choice_block">
+            </button>
+            <button data-score="3" class="choice_block">
                 basketbal
-            </div>
-            <div data-score="4" class="choice_block">
+            </button>
+            <button data-score="4" class="choice_block">
                 hokej
-            </div>
-            <div data-score="5" class="choice_block">
+            </button>
+            <button data-score="5" class="choice_block">
                 americký fotbal
-            </div>
-            <div data-score="6" class="choice_block">
+            </button>
+            <button data-score="6" class="choice_block">
                 baseball
-            </div>
-            <div data-score="7" class="choice_block">
+            </button>
+            <button data-score="7" class="choice_block">
                 házená
-            </div>
-            <div data-score="8" class="choice_block">
+            </button>
+            <button data-score="8" class="choice_block">
                 rugby
-            </div>
-            <div data-score="9" class="choice_block">
+            </button>
+            <button data-score="9" class="choice_block">
                 florbal
-            </div>
+            </button>
         </section>
 
         <h2>Druhy</h2>
         <section id="types">
-            <div data-score="0" class="choice_block active">
+            <button data-score="0" id="all_types" class="choice_block active">
                 vše
-            </div>
-            <div data-score="1" class="choice_block">
+            </button>
+            <button data-score="1" class="choice_block">
                 soutěže
-            </div>
-            <div data-score="2" class="choice_block">
+            </button>
+            <button data-score="2" class="choice_block">
                 týmy
-            </div>
-            <div data-score="3" class="choice_block">
+            </button>
+            <button data-score="3" class="choice_block">
                 hráči jednotlivci (např. tenisti)
-            </div>
-            <div data-score="4" class="choice_block">
+            </button>
+            <button data-score="4" class="choice_block">
                 hráči v týmech (např. fotbalisti)
-            </div>
+            </button>
         </section>
     </section>
 
     <section id="results">
+        <div class="results_type">
+            soutez
+        </div>
+        <div class="result">
+            <section class="result_images">
+                <img class="logo" src="https://images.pexels.com/photos/574073/pexels-photo-574073.jpeg">
+            </section>
+            <section class="result_info">
+                <h1>AAA</h1>
+            </section>
+        </div>
+
+        <div class="result">
+            <section class="result_images">
+                <img class="logo" src="https://images.pexels.com/photos/574073/pexels-photo-574073.jpeg">
+            </section>
+            <section class="result_info">
+                <h1>AAA</h1>
+            </section>
+        </div>
+
+        <div class="results_type">
+            basketbal
+        </div>
+        <div class="result">
+            <section class="result_images">
+                <img class="logo" src="https://images.pexels.com/photos/574073/pexels-photo-574073.jpeg">
+            </section>
+            <section class="result_info">
+                <h1>AAA</h1>
+            </section>
+        </div>
+
         <div class="result">
             <section class="result_images">
                 <img class="logo" src="https://images.pexels.com/photos/574073/pexels-photo-574073.jpeg">
