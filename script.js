@@ -3,7 +3,6 @@ class SearchPageLogic {
         this.input = document.getElementById('search_input')
         this.searchBtn = document.getElementById('search_button')
 
-        this.selectSection = document.getElementById('select')
         this.sportsSection = document.getElementById('sports')
         this.typesSection = document.getElementById('types')
 
@@ -20,6 +19,9 @@ class SearchPageLogic {
         this.sportsIDs = []
         this.typesIDs = []
 
+        this.resources = []
+        this.results = document.getElementById('results')
+
         this.handle()
     }
 
@@ -29,38 +31,114 @@ class SearchPageLogic {
         this.setAllTypes()
     }
 
-    createRequest() {
+    showResults() {
+        console.log(this.resources)
+        for (let i = 0; i < this.resources.length; i++) {
+            if (i === 0) {
+                this.results.appendChild(this.createSportResultsElement(this.resources[i]))
+                this.results.appendChild(this.createTypeResultsElement(this.resources[i]))
+            }
+            else{
+                console.log(i)
+                if(this.resources[i-1].sport.name !== this.resources[i].sport.name){
+                    this.results.appendChild(this.createSportResultsElement(this.resources[i]))
+                }
+                if(this.resources[i-1].type.name !== this.resources[i].type.name){
+                    this.results.appendChild(this.createTypeResultsElement(this.resources[i]))
+                }
+            }
+            this.results.appendChild(this.createResourceElement(this.resources[i]))
+        }
+    }
+
+    clearResults(){
+        this.results.innerHTML = ''
+    }
+
+    createSportResultsElement(source) {
+        const resultBlock = document.createElement('div');
+        resultBlock.classList.add('results_type')
+        resultBlock.textContent = source.sport.name
+
+        return resultBlock
+    }
+
+    createTypeResultsElement(source) {
+        const resultBlock = document.createElement('div');
+        resultBlock.classList.add('results_type')
+        resultBlock.textContent = source.type.name
+        return resultBlock
+    }
+
+    createResourceElement(source) {
+        const resultBlock = document.createElement('div');
+        resultBlock.classList.add('result')
+        const imagesSection = document.createElement('section');
+        source.images.forEach(i => {
+            const img = document.createElement('img');
+            img.classList.add('logo')
+            img.src = 'https://www.livesport.cz/res/image/data/' + i.path
+            img.alt = 'img'
+            imagesSection.appendChild(img)
+        })
+        const infoSection = document.createElement('section');
+        const name = document.createElement('span');
+        name.textContent = source.name
+        infoSection.appendChild(name)
+        resultBlock.appendChild(imagesSection)
+        resultBlock.appendChild(infoSection)
+        return resultBlock
+    }
+
+    async getResources() {
+        const link = this.createLink()
+        console.log(link)
+        try {
+            const response = await fetch(link, {
+                method: 'GET',
+                headers: {
+                    'Accept': 'application/json',
+                },
+            });
+            const data = await response.json();
+            this.resources = data
+            this.sortResources()
+            console.log(data)
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    sortResources() {
+        this.resources.sort((a, b) => {
+            if (a.sport.id !== b.sport.id) {
+                return a.sport.id - b.sport.id
+            } else {
+                a.type.id !== b.type.id
+            }
+        })
+    }
+
+    createLink() {
         const searchUrl = "https://s.livesport.services/api/v2/search"
         const searchParams = new URLSearchParams({
                 'type-ids': this.typesIDs.join(','),
-                'project-type-id': this.projectTypeSelect.selectedIndex + 1,
-                'project-id': this.projectSelect.selectedIndex + 1,
-                'lang-id': this.languageSelect.selectedIndex + 1,
+                'project-type-id': this.projectTypeSelect[this.projectTypeSelect.selectedIndex].dataset.score,
+                'project-id': this.projectSelect[this.projectSelect.selectedIndex].dataset.score,
+                'lang-id': this.languageSelect[this.languageSelect.selectedIndex].dataset.score,
                 'q': this.input.value,
                 'sport-ids': this.sportsIDs.join(',')
             }
         )
-        console.log(searchUrl + '?' + searchParams)
         return searchUrl + '?' + searchParams
     }
 
     addEventListeners() {
-        this.input.addEventListener('input', () => {
 
-        })
-
-        this.searchBtn.addEventListener('click', () => {
-
-        })
-
-        const selects = Array.from(this.selectSection.children)
-
-        selects.forEach(s => {
-            if (s.tagName !== 'LABEL') {
-                s.addEventListener('change', () => {
-                    console.log(s)
-                })
-            }
+        this.searchBtn.addEventListener('click', async () => {
+            await this.getResources()
+            this.clearResults()
+            this.showResults()
         })
 
         const sports = Array.from(this.sportsSection.children)
@@ -107,9 +185,6 @@ class SearchPageLogic {
             this.sportsIDs.push(Number(s.dataset.score))
         }
         s.classList.toggle('active')
-
-        console.log(this.sportsIDs)
-        this.createRequest()
     }
 
     toggleType(t) {
@@ -129,9 +204,6 @@ class SearchPageLogic {
             this.typesIDs.push(Number(t.dataset.score))
         }
         t.classList.toggle('active')
-
-        console.log(this.typesIDs)
-        this.createRequest()
     }
 
     setAllSports() {
@@ -146,9 +218,6 @@ class SearchPageLogic {
             }
         })
         this.allSportsAreSet = true
-
-        console.log(this.sportsIDs)
-        this.createRequest()
     }
 
     setAllTypes() {
@@ -164,9 +233,6 @@ class SearchPageLogic {
             }
         })
         this.allTypesAreSet = true
-
-        console.log(this.typesIDs)
-        this.createRequest()
     }
 }
 
