@@ -9,13 +9,23 @@
 </head>
 <body>
 
-<h1 id="main_title">Livesport Search</h1>
+<header>
+    <h1 id="main_title">Livesport Search</h1>
+
+</header>
 
 <main>
+    <section id="alert">
+        <span>Něco se nezdařilo...</span>
+        <section>
+            <button id="reload_alert_btn" class="alert_btn">Obnovit</button>
+            <button id="close_alert_btn" class="alert_btn">Zavřit</button>
+        </section>
+    </section>
     <section id="main_page">
         <section id="text_search">
             <label for="search_input"></label><input id="search_input" type="text" placeholder="Jagr...">
-            <button id="search_button">Search</button>
+            <button id="search_button">Hledat</button>
         </section>
 
         <section id="select">
@@ -68,7 +78,7 @@
             </button>
         </section>
 
-        <h2>Druhy</h2>
+        <h2>Specifikace</h2>
         <section id="types">
             <button data-score="0" id="all_types" class="choice_block active">
                 vše
@@ -87,9 +97,11 @@
             </button>
         </section>
 
+        <h2 id="results_title">Výsledky</h2>
         <section id="results">
         </section>
     </section>
+    <div id="loader" class="loader"></div>
     <section id="modal">
         <section id="detail_content">
 
@@ -99,9 +111,9 @@
 
             <section id="profile_info">
                 <h2>Detail:</h2>
-                <h3>Jméno: Aleksandr</h3>
-                <h3>Jméno: Aleksandr</h3>
-                <h3>Jméno: Aleksandr</h3>
+                <section id="profile_specific_info">
+
+                </section>
             </section>
             <section id="hide_btn">
                 <h2>Back</h2>

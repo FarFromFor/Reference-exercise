@@ -7,32 +7,54 @@
     margin: 0;
 }
 
-body {
+:root {
+    --text-color: rgba(0, 0, 0, 0.95);
+    --search-border-color: rgba(0, 0, 0, 0.95);
+    --red-color: #ff0046;
+    --white-text-color: #fff;
+    --body-background-color: #eee;
+    --main-baclground-color: #fff;
+    --light-grey-background-color: #eee;
+    --deep-grey-background-color: #d2d2d2;
+    --result-category-background-color: #eef7ff;
+    --modal-background-color: rgba(0, 0, 0, 0.35);
+}
+
+header {
     width: 100%;
+}
+
+body {
     display: block;
     justify-items: center;
-    background-color: #eee
+    width: 100%;
+    background-color: var(--body-background-color)
 }
 
 #main_title {
     width: 100%;
-    background-color: black;
-    color: #fff;
+    background-color: var(--text-color);
+    color: var(--white-text-color);
+    padding: 0.5rem;
 }
 
 main {
-    width: 60%;
     display: block;
     justify-items: center;
-    background-color: #fff;
-    padding: 2rem;
+    width: 60%;
+    background-color: var(--main-baclground-color);
     border-radius: 0 0 0.5rem 0.5rem;
+    padding: 2rem;
 }
+
+/* MAIN PAGE */
 
 #main_page {
     display: block;
     width: 100%;
 }
+
+/* MAIN PAGE SEARCH */
 
 #text_search {
     display: flex;
@@ -42,9 +64,12 @@ main {
 #search_input {
     width: 100%;
     height: 3rem;
+    border: 0.2rem solid var(--search-border-color);
     border-radius: 0.5rem 0 0 0.5rem;
-    padding: 0 0.5rem;
+    border-right: none;
     font-size: 2rem;
+    outline: none;
+    padding: 0 0.5rem;
     margin: 1rem 0;
 }
 
@@ -52,9 +77,12 @@ main {
     width: 6rem;
     height: 3rem;
     border-radius: 0 0.5rem 0.5rem 0;
+    border: 0.2rem solid var(--search-border-color);
+    font-size: 1.4rem;
 }
 
 #search_button:hover {
+    background-color: var(--deep-grey-background-color);
     cursor: pointer;
 }
 
@@ -73,39 +101,42 @@ main {
     min-width: max-content;
     height: 3rem;
     min-height: max-content;
-
     border-radius: 0.5rem;
+    font-size: 1.5rem;
     margin: 0.5rem 1rem 0.5rem 0;
     padding: 0.5rem 1rem;
-    font-size: 1.5rem;
 }
 
 .choice_block {
     display: flex;
     justify-content: center;
     align-items: center;
-
     min-width: max-content;
     height: 3rem;
     min-height: max-content;
-
-    background-color: #eee;
+    background-color: var(--light-grey-background-color);
     border: none;
     border-radius: 0.5rem;
-    padding: 0.5rem 1rem;
-    margin: 0.5rem 1rem 0.5rem 0;
     font-size: 1.5rem;
     cursor: pointer;
+    padding: 0.5rem 1rem;
+    margin: 0.5rem 1rem 0.5rem 0;
 }
 
 .choice_block:hover {
-    background-color: #d2d2d2;
+    background-color: var(--deep-grey-background-color);
 }
 
 .active,
 .active:hover {
-    color: #fff;
-    background-color: #ff0046
+    color: var(--white-text-color);
+    background-color: var(--red-color)
+}
+
+/* MAIN PAGE RESULTS */
+
+#results_title {
+    display: none;
 }
 
 #results {
@@ -116,7 +147,7 @@ main {
 .sport_results,
 .type_results {
     width: 100%;
-    background-color: #eef7ff;
+    background-color: var(--result-category-background-color);
     font-size: 1.5rem;
     margin: 0 0 0.2rem 0;
 }
@@ -130,14 +161,14 @@ main {
     justify-content: start;
     align-items: center;
     height: 4rem;
-    margin: 0.2rem 0;
-    background-color: #eee;
+    background-color: var(--light-grey-background-color);
     cursor: pointer;
     font-size: 1.5rem;
+    margin: 0.2rem 0;
 }
 
 .result:hover {
-    background-color: #d2d2d2;
+    background-color: var(--deep-grey-background-color)
 }
 
 .result_images {
@@ -150,51 +181,109 @@ main {
 
 }
 
-/* DETAIL */
-#modal{
+/* DETAIL MODAL */
+
+#modal {
     display: none;
     justify-content: center;
     position: fixed;
     z-index: 1;
     left: 0;
     top: 0;
-
     width: 100%;
     height: 100%;
-
+    background-color: var(--modal-background-color);
     overflow: auto;
-    background-color: rgba(0, 0, 0, 0.36);
 }
 
-#detail_content{
+#detail_content {
     display: flex;
     justify-content: start;
     align-items: start;
-
     min-width: max-content;
     height: 40%;
     min-height: 15rem;
-    background-color: #fff;
+    background-color: var(--main-baclground-color);
+    border-radius: 0.5rem;
     margin: 12% auto;
     padding: 1rem;
-    border-radius: 0.5rem;
 }
 
-#profile_photos{
-    background-color: grey;
+#profile_photos {
     height: 100%;
     min-width: max-content;
 }
 
-.profile_image{
+.profile_image {
     height: 100%;
 }
 
-#profile_info{
-    background-color: rgba(250, 205, 91, 0.93);
+#profile_info {
     margin: 0 1rem;
 }
 
-#hide_btn{
+#profile_specific_info {
+    font-size: 1.4rem;
+}
+
+#hide_btn {
     cursor: pointer;
+}
+
+#hide_btn:hover {
+    text-decoration: underline;
+}
+
+/* SPINNER */
+
+/* Inspired by: https://www.w3schools.com/howto/howto_css_loader.asp */
+.loader {
+    display: none;
+    border: 1.5rem solid var(--light-grey-background-color);
+    border-top: 1.5rem solid var(--red-color);
+    border-radius: 50%;
+    width: 10rem;
+    height: 10rem;
+    animation: spin 2s linear infinite;
+    margin-top: 5%;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+/* ALERT */
+
+#alert {
+    display: none;
+    position: fixed;
+    right: 0;
+    top: 4rem;
+    z-index: 11;
+    font-size: 2rem;
+    color: var(--white-text-color);
+    background-color: var(--red-color);
+    width: 18%;
+    border-radius: 0.5rem 0 0 0.5rem;
+    margin: 0;
+    padding: 0.5rem;
+}
+
+.alert_btn {
+    min-width: max-content;
+    font-size: 1.5rem;
+    background-color: var(--light-grey-background-color);
+    border-radius: 0.5rem;
+    border: none;
+    cursor: pointer;
+    padding: 0.2rem 0.4rem;
+}
+
+.alert_btn:hover {
+    background-color: var(--deep-grey-background-color);
 }
