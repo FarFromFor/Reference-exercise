@@ -7,20 +7,20 @@
     margin: 0;
 }
 
-body{
+body {
     width: 100%;
     display: block;
     justify-items: center;
     background-color: #eee
 }
 
-#main_title{
+#main_title {
     width: 100%;
     background-color: black;
     color: #fff;
 }
 
-main{
+main {
     width: 60%;
     display: block;
     justify-items: center;
@@ -29,17 +29,17 @@ main{
     border-radius: 0 0 0.5rem 0.5rem;
 }
 
-#search{
+#main_page {
     display: block;
     width: 100%;
 }
 
-#text_search{
+#text_search {
     display: flex;
     align-items: center;
 }
 
-#search_input{
+#search_input {
     width: 100%;
     height: 3rem;
     border-radius: 0.5rem 0 0 0.5rem;
@@ -47,13 +47,14 @@ main{
     font-size: 2rem;
     margin: 1rem 0;
 }
-#search_button{
+
+#search_button {
     width: 6rem;
     height: 3rem;
     border-radius: 0 0.5rem 0.5rem 0;
 }
 
-#search_button:hover{
+#search_button:hover {
     cursor: pointer;
 }
 
@@ -64,11 +65,11 @@ main{
     flex-wrap: wrap;
 }
 
-#select{
+#select {
     display: none;
 }
 
-.select_block{
+.select_block {
     min-width: max-content;
     height: 3rem;
     min-height: max-content;
@@ -79,7 +80,7 @@ main{
     font-size: 1.5rem;
 }
 
-.choice_block{
+.choice_block {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -97,38 +98,103 @@ main{
     cursor: pointer;
 }
 
-.active{
+.choice_block:hover {
+    background-color: #d2d2d2;
+}
+
+.active,
+.active:hover {
     color: #fff;
-    background-color:#ff0046
+    background-color: #ff0046
 }
 
-#results{
-    width: 100%
+#results {
+    width: 100%;
+    margin-top: 0.5rem;
 }
 
-.results_type{
+.sport_results,
+.type_results {
     width: 100%;
     background-color: #eef7ff;
     font-size: 1.5rem;
+    margin: 0 0 0.2rem 0;
 }
 
-.result{
+.sport_results {
+    font-weight: bold;
+}
+
+.result {
     display: flex;
     justify-content: start;
     align-items: center;
     height: 4rem;
     margin: 0.2rem 0;
-    background-color: grey;
-
+    background-color: #eee;
+    cursor: pointer;
+    font-size: 1.5rem;
 }
 
-.result_images{
+.result:hover {
+    background-color: #d2d2d2;
+}
+
+.result_images {
     height: 100%;
 }
 
-.logo{
+.logo {
     width: 4rem;
     height: 100%;
 
 }
 
+/* DETAIL */
+#modal{
+    display: none;
+    justify-content: center;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+
+    width: 100%;
+    height: 100%;
+
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.36);
+}
+
+#detail_content{
+    display: flex;
+    justify-content: start;
+    align-items: start;
+
+    min-width: max-content;
+    height: 40%;
+    min-height: 15rem;
+    background-color: #fff;
+    margin: 12% auto;
+    padding: 1rem;
+    border-radius: 0.5rem;
+}
+
+#profile_photos{
+    background-color: grey;
+    height: 100%;
+    min-width: max-content;
+}
+
+.profile_image{
+    height: 100%;
+}
+
+#profile_info{
+    background-color: rgba(250, 205, 91, 0.93);
+    margin: 0 1rem;
+}
+
+#hide_btn{
+    cursor: pointer;
+}

@@ -22,6 +22,9 @@ class SearchPageLogic {
         this.resources = []
         this.results = document.getElementById('results')
 
+        this.modal = document.getElementById('modal')
+        this.hideMudalBtn = document.getElementById('hide_btn')
+
         this.handle()
     }
 
@@ -31,49 +34,64 @@ class SearchPageLogic {
         this.setAllTypes()
     }
 
+    showModal() {
+        this.modal.style.display = 'flex'
+    }
+
+    hideModal() {
+        console.log(this.modal)
+        this.modal.style.display = 'none'
+    }
+
     showResults() {
-        console.log(this.resources)
+        const resultsTitle = document.createElement('h2')
+        resultsTitle.textContent = 'Výsledky'
+        this.results.parentNode.insertBefore(resultsTitle, this.results)
         for (let i = 0; i < this.resources.length; i++) {
             if (i === 0) {
-                this.results.appendChild(this.createSportResultsElement(this.resources[i]))
-                this.results.appendChild(this.createTypeResultsElement(this.resources[i]))
-            }
-            else{
+                this.results.appendChild(this.createSportResultsElement(i))
+                this.results.appendChild(this.createTypeResultsElement(i))
+            } else {
                 console.log(i)
-                if(this.resources[i-1].sport.name !== this.resources[i].sport.name){
-                    this.results.appendChild(this.createSportResultsElement(this.resources[i]))
+                if (this.resources[i - 1].sport.name !== this.resources[i].sport.name) {
+                    this.results.appendChild(this.createSportResultsElement(i))
                 }
-                if(this.resources[i-1].type.name !== this.resources[i].type.name){
-                    this.results.appendChild(this.createTypeResultsElement(this.resources[i]))
+                if (this.resources[i - 1].type.name !== this.resources[i].type.name) {
+                    this.results.appendChild(this.createTypeResultsElement(i))
                 }
             }
-            this.results.appendChild(this.createResourceElement(this.resources[i]))
+            this.results.appendChild(this.createResourceElement(i))
         }
     }
 
-    clearResults(){
+    clearResults() {
         this.results.innerHTML = ''
     }
 
-    createSportResultsElement(source) {
+    createSportResultsElement(resourceIndex) {
+        const source = this.resources[resourceIndex]
         const resultBlock = document.createElement('div');
-        resultBlock.classList.add('results_type')
+        resultBlock.classList.add('sport_results')
         resultBlock.textContent = source.sport.name
 
         return resultBlock
     }
 
-    createTypeResultsElement(source) {
+    createTypeResultsElement(resourceIndex) {
+        const source = this.resources[resourceIndex]
         const resultBlock = document.createElement('div');
-        resultBlock.classList.add('results_type')
+        resultBlock.classList.add('type_results')
         resultBlock.textContent = source.type.name
         return resultBlock
     }
 
-    createResourceElement(source) {
+    createResourceElement(resourceIndex) {
+        const source = this.resources[resourceIndex]
         const resultBlock = document.createElement('div');
         resultBlock.classList.add('result')
+        resultBlock.dataset.score = resourceIndex
         const imagesSection = document.createElement('section');
+        imagesSection.classList.add('result_images')
         source.images.forEach(i => {
             const img = document.createElement('img');
             img.classList.add('logo')
@@ -81,12 +99,22 @@ class SearchPageLogic {
             img.alt = 'img'
             imagesSection.appendChild(img)
         })
+        if (source.images.length === 0) {
+            const img = document.createElement('img');
+            img.classList.add('logo')
+            img.src = './placeholder.png'
+            img.alt = 'img'
+            imagesSection.appendChild(img)
+        }
         const infoSection = document.createElement('section');
         const name = document.createElement('span');
         name.textContent = source.name
         infoSection.appendChild(name)
         resultBlock.appendChild(imagesSection)
         resultBlock.appendChild(infoSection)
+        resultBlock.addEventListener('click', ()=>{
+            this.showModal()
+        })
         return resultBlock
     }
 
@@ -112,11 +140,11 @@ class SearchPageLogic {
     sortResources() {
         this.resources.sort((a, b) => {
             if (a.sport.id !== b.sport.id) {
-                return a.sport.id - b.sport.id
+                return a.sport.id - b.sport.id;
             } else {
-                a.type.id !== b.type.id
+                return a.type.id - b.type.id;
             }
-        })
+        });
     }
 
     createLink() {
@@ -134,7 +162,6 @@ class SearchPageLogic {
     }
 
     addEventListeners() {
-
         this.searchBtn.addEventListener('click', async () => {
             await this.getResources()
             this.clearResults()
@@ -165,6 +192,10 @@ class SearchPageLogic {
                     this.setAllTypes()
                 })
             }
+        })
+
+        this.hideMudalBtn.addEventListener('click', () => {
+            this.hideModal()
         })
     }
 
