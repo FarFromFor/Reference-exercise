@@ -25,4 +25,17 @@ Nemám už ale čas ji rozdělit do více tříd.
 
 Součástí zadání bylo otevírání detailu hráče/týmu na nové stránce, ale vzhledem k malému množství informací na stránce a responzivnějšímu designu jsem to nechal udělat modalem.
 
+## Testy
 
+**Instalace závislostí**
+
+```bash
+npm install
+```
+---
+
+**Spuštění testů**
+
+```bash
+npm test
+```
